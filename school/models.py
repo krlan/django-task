@@ -16,7 +16,7 @@ class School(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("skill:subjects", kwargs={
+        return reverse("school:school", kwargs={
             "slug_school": self.slug
         })
 
@@ -33,10 +33,10 @@ class Classroom(models.Model):
         verbose_name_plural = 'Classrooms'
 
     def __str__(self):
-        return self.category_name
+        return self.number
 
     def get_absolute_url(self):
-        return reverse("skill:subjects", kwargs={
+        return reverse("school:classroom", kwargs={
             "slug_school": self.school.slug,
             "slug_class": self.slug
         })
@@ -56,7 +56,7 @@ class Student(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("skill:subjects", kwargs={
+        return reverse("school:student", kwargs={
             "slug_school": self.classroom.school.slug,
             "slug_class": self.classroom.slug,
             "slug": self.slug
