@@ -1,32 +1,35 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from .serializers import SchoolSerializer, ClassroomSerializer, StudentSerializer
+from rest_framework import viewsets
+
+
+
+class SchoolViewSet(viewsets.ModelViewSet):
+    model = School
+    queryset = School.objects.all()
+    serializer_class = SchoolSerializer
+
+
+class ClassroomViewSet(viewsets.ModelViewSet):
+    model = Classroom
+    queryset = Classroom.objects.all()
+    serializer_class = ClassroomSerializer
+
+
+class StudentViewSet(viewsets.ModelViewSet):
+    model = Student
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
 
 def index(request):
-    context = {
-        'schools': School.objects.all(),
-    }
-    return render(request, 'school/index.html', context)
+    return render(request, 'school/index.html')
 
 
-def school(request, slug, *args, **kwargs):
-    context = {
-        'object_list': Classroom.objects.filter(school__slug=slug),
-        'school': get_object_or_404(School, slug=slug)
-    }
-    return render(request, 'school/school.html', context)
+def school(request, pk):
+    return render(request, 'school/school.html')
 
 
-def classroom(request, slug, *args, **kwargs):
-    context = {
-        'object_list': Student.objects.filter(classroom__slug=slug),
-        'classroom': get_object_or_404(Classroom, slug=slug)
-    }
-    return render(request, 'school/classroom.html', context)
-
-
-def student(request, slug, *args, **kwargs):
-    context = {
-        'student': get_object_or_404(Student, slug=slug),
-    }
-    return render(request, 'school/student.html', context)
+def classroom(request, pk):
+    return render(request, 'school/classroom.html')

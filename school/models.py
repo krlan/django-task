@@ -4,6 +4,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class School(models.Model):
+    img = models.URLField("Image URL", max_length=200)
     name = models.CharField("School name", max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
 
@@ -25,7 +26,6 @@ class Classroom(models.Model):
     school = models.ForeignKey(School)
     number = models.IntegerField("Classroom number", validators=[MaxValueValidator(100000),
                                                                 MinValueValidator(0)])
-    slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
         ordering = ["-number"]
@@ -33,12 +33,12 @@ class Classroom(models.Model):
         verbose_name_plural = 'Classrooms'
 
     def __str__(self):
-        return self.number
+        return '{0} {1}'.format(self.school, self.number)
 
     def get_absolute_url(self):
         return reverse("school:classroom", kwargs={
             "slug_school": self.school.slug,
-            "slug_class": self.slug
+            "class": self.pk
         })
 
 
@@ -58,6 +58,6 @@ class Student(models.Model):
     def get_absolute_url(self):
         return reverse("school:student", kwargs={
             "slug_school": self.classroom.school.slug,
-            "slug_class": self.classroom.slug,
+            "class": self.classroom.pk,
             "slug": self.slug
         })

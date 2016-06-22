@@ -1,9 +1,15 @@
-from django.conf.urls import url
+from rest_framework import routers
+from django.conf.urls import url, include
 from . import views
 
+router = routers.DefaultRouter()
+router.register(r'school', views.SchoolViewSet)
+router.register(r'class', views.ClassroomViewSet)
+router.register(r'student', views.StudentViewSet)
+
 urlpatterns = [
+    url(r'^api/', include(router.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'^(?P<slug_school>[\w-]+)/$', views.school, name='school'),
-    url(r'^(?P<slug_school>[\w-]+)/(?P<slug_class>[\w-]+)/$', views.classroom, name='classroom'),
-    url(r'^(?P<slug_school>[\w-]+)/(?P<slug_class>[\w-]+)/(?P<slug>[\w-]+)/$', views.student, name='student'),
+    url(r'^school/(?P<pk>[0-9]+)/$', views.school, name='school'),
+    url(r'^class/(?P<pk>[0-9]+)/$', views.classroom, name='class'),
 ]

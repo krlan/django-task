@@ -1,0 +1,64 @@
+{% extends "school/base.html" %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Schools
+                    <small>231</small>
+                </h1>
+            </div>
+        </div>
+
+{% verbatim %}
+<div ng-controller="AppController">
+    <div ng-repeat="school in schools|orderBy:'id'">
+        <div class="row">
+            <div class="col-md-7">
+                <a href="/school/{{ school.id }}/">
+                    <img class="img-responsive" src="{{ school.img }}" alt="">
+                </a>
+            </div>
+            <div class="col-md-5">
+                <h3>{{ school.name }}</h3>
+                <h4>12</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+                <a class="btn btn-primary" href="/school/{{ school.id }}/">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+    <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+    <hr>
+{% endverbatim %}
+{% endblock content %}
