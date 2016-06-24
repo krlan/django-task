@@ -16,9 +16,7 @@
     <div ng-repeat="school in schools|orderBy:'id'">
         <div class="row">
             <div class="col-md-7">
-                <a href="/school/{{ school.id }}/">
                     <img class="img-responsive" src="{{ school.img }}" alt="">
-                </a>
             </div>
             <div ng-controller="SchoolController">
                 <div ng-controller="ClassController">
