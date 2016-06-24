@@ -2,16 +2,17 @@
 
 {% block content %}
 
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Schools
-                    <small>231</small>
-                </h1>
-            </div>
-        </div>
-
 {% verbatim %}
 <div ng-controller="AppController">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Schools
+                    <small>{{ schools.length }}</small>
+                </h1>
+        </div>
+    </div>
+
+
     <div ng-repeat="school in schools|orderBy:'id'">
         <div class="row">
             <div class="col-md-7">
@@ -19,46 +20,46 @@
                     <img class="img-responsive" src="{{ school.img }}" alt="">
                 </a>
             </div>
-            <div class="col-md-5">
-                <h3>{{ school.name }}</h3>
-                <h4>12</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-                <a class="btn btn-primary" href="/school/{{ school.id }}/">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <div ng-controller="SchoolController">
+                <div ng-controller="ClassController">
+                    <div class="col-md-5">
+                        <h3>{{ school.name }}</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
+                        <a class="btn btn-primary" data-toggle="collapse" type="button" href="#collapse-sch-{{ school.id }}" aria-expanded="false" aria-controls="collapse-sch-{{ school.id }}">View Classrooms <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <div class="collapse" id="collapse-sch-{{ school.id }}">
+                            <hr>
+
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div ng-repeat="class in classrooms|filter:{'school': {'id': school.id}}|orderBy:'number'">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="heading-cl-{{ class.id }}">
+                                            <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#collapse-cl-{{ class.id }}" aria-expanded="true" aria-controls="collapse-cl-{{ class.id }}">
+                        {{ class.number }}
+                    </a>
+                </h4>
+                                        </div>
+                                        <div id="collapse-cl-{{ class.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-cl-{{ class.id }}">
+                                            <div class="panel-body">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item" ng-repeat="student in students|filter:{'classroom': {'id': class.id}}|orderBy:'name'">
+                                                        {{ student.name }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>
     </div>
 </div>
 
-    <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-    <hr>
 {% endverbatim %}
 {% endblock content %}

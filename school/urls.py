@@ -10,6 +10,4 @@ router.register(r'student', views.StudentViewSet)
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^$', views.index, name='index'),
-    url(r'^school/(?P<pk>[0-9]+)/$', views.school, name='school'),
-    url(r'^class/(?P<pk>[0-9]+)/$', views.classroom, name='class'),
 ]

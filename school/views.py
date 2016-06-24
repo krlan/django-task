@@ -26,10 +26,3 @@ class StudentViewSet(viewsets.ModelViewSet):
 def index(request):
     return render(request, 'school/index.html')
 
-
-def school(request, pk):
-    return render(request, 'school/school.html')
-
-
-def classroom(request, pk):
-    return render(request, 'school/classroom.html')

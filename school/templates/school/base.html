@@ -15,7 +15,7 @@
     <link href="{% static "css/1-col-portfolio.css" %}" rel="stylesheet">
 
     <title></title>
-
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/angular-1.5.7.js" %}"></script>
     <script src="{% static "js/angularRoute-1.5.7.js" %}"></script>
     <script src="{% static "js/app.js" %}"></script>
@@ -58,6 +58,36 @@
     <div class="container">
 
         <div>{% block content %}{% endblock %}</div>
+
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
 
 
         <!-- Footer -->
